@@ -1,5 +1,5 @@
 /* =============================================================
-   Cikedis — static site behaviour
+   Cikedis — static site behaviour (Optimized)
    Vanilla JS, no dependencies. Progressive enhancement:
    every feature degrades gracefully if JS is unavailable.
    ============================================================= */
@@ -16,8 +16,12 @@
   /* ---------- WhatsApp links with pre-written order text ---------- */
   document.querySelectorAll("a[data-wa]").forEach(function (link) {
     var message = link.getAttribute("data-wa");
-    var base = (link.getAttribute("href") || WA_BASE).split("?")[0];
-    link.setAttribute("href", base + "?text=" + encodeURIComponent(message));
+    if (!message) return;
+
+    var rawHref = link.getAttribute("href") || WA_BASE;
+    // 安全清理 URL，防止双斜杠或重复问号
+    var cleanBase = rawHref.split("?")[0].replace(/\/+$/, "");
+    link.setAttribute("href", cleanBase + "?text=" + encodeURIComponent(message));
   });
 
   /* ---------- Mobile navigation ---------- */
@@ -38,7 +42,10 @@
     });
 
     mobileNav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", closeNav);
+      link.addEventListener("click", function () {
+        // 延时关闭，保证平滑滚动体验
+        setTimeout(closeNav, 150);
+      });
     });
 
     document.addEventListener("keydown", function (event) {
@@ -87,10 +94,12 @@
     });
   }
 
-  /* ---------- Headline character animation ---------- */
+  /* ---------- Headline character animation (Optimized) ---------- */
   document.querySelectorAll("[data-split]").forEach(function (node) {
     var mode = node.getAttribute("data-split");
     var text = node.textContent.trim();
+    if (!text) return;
+
     var className = mode === "pop" ? "pop-char" : "reveal-char";
     var frag = document.createDocumentFragment();
 
@@ -216,7 +225,8 @@
   );
   var sections = navLinks
     .map(function (link) {
-      return document.querySelector(link.getAttribute("href"));
+      var targetId = link.getAttribute("href");
+      return targetId && targetId !== "#" ? document.querySelector(targetId) : null;
     })
     .filter(Boolean);
 
@@ -241,6 +251,9 @@
   /* ---------- Click spark ---------- */
   if (!reduceMotion) {
     document.addEventListener("pointerdown", function (event) {
+      // 避免在按钮和交互元素上重复触发或影响点击
+      if (event.target.closest("button, a, input")) return;
+
       var spark = document.createElement("span");
       spark.className = "spark";
       spark.style.left = event.clientX + "px";
