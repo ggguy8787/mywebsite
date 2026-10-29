@@ -1,13 +1,13 @@
 /* =============================================================
    Cikedis — snacks for better study
-   Static site stylesheet (Flat structure)
+   Static site stylesheet (Flat structure, System fonts fallback)
    ============================================================= */
 
 :root {
-  /* Typography */
-  --font-body: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-display: "Fredoka", "Nunito", sans-serif;
-  --font-hand: "Caveat", "Nunito", cursive;
+  /* Typography - 使用高质感跨平台通用字体 */
+  --font-body: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Fredoka", "Nunito", system-ui, -apple-system, sans-serif;
+  --font-hand: "Caveat", "Comic Sans MS", cursive;
 
   --fs-display: clamp(2.75rem, 9vw, 5.5rem);
   --fs-headline: clamp(1.75rem, 4.4vw, 2.75rem);
@@ -23,42 +23,34 @@
   --radius-xl: 2rem;
   --radius-pill: 999px;
 
-  /* Brand palette (OKLab / OKLCH) */
-  --cream: oklch(0.9696 0.0244 83.4);
-  --cream-deep: oklch(0.9364 0.0368 80.6);
-  --paper: oklch(0.9887 0.0126 86.8);
-  --cocoa: oklch(0.308 0.0653 46.7);
-  --cocoa-soft: oklch(0.3919 0.0885 46.2);
-  --cocoa-mid: oklch(0.5223 0.1095 52);
-  --caramel: oklch(0.6802 0.1666 47.5);
-  --caramel-deep: oklch(0.6064 0.1704 42.1);
-  --amber: oklch(0.7709 0.1467 67);
-  --butter: oklch(0.8625 0.1494 84.7);
-  --butter-pale: oklch(0.9207 0.0957 88.5);
+  /* Brand palette */
+  --cream: #fdf3e3;
+  --cream-deep: #f8e8d0;
+  --paper: #ffffff;
+  --cocoa: #4a2c11;
+  --cocoa-soft: #633e1c;
+  --cocoa-mid: #855b33;
+  --caramel: #d97724;
+  --caramel-deep: #b85e13;
+  --amber: #f2a93b;
+  --butter: #fce182;
+  --butter-pale: #fef4cf;
 
   /* Semantic aliases */
   --bg: var(--cream);
   --fg: var(--cocoa);
   --muted-fg: var(--cocoa-mid);
-  --line: oklch(0.308 0.0653 46.7 / 0.14);
+  --line: rgba(74, 44, 17, 0.14);
 
   /* Elevation */
-  --shade-1: oklch(0.308 0.0653 46.7 / 0.08);
-  --shade-2: oklch(0.308 0.0653 46.7 / 0.14);
-  --shadow-sm: 0 2px 6px var(--shade-1);
-  --shadow-md: 0 6px 16px var(--shade-2), 0 2px 4px var(--shade-1);
-  --shadow-lg: 0 14px 34px var(--shade-2), 0 5px 10px var(--shade-1);
   --sticker: 4px 5px 0 var(--cocoa);
   --sticker-lg: 7px 9px 0 var(--cocoa);
   --sticker-xl: 8px 10px 0 var(--cocoa);
 
   /* Motion */
-  --dur-fast: 150ms;
   --dur: 220ms;
   --dur-slow: 380ms;
-  --dur-slower: 640ms;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Layout */
   --shell: 1180px;
@@ -86,9 +78,9 @@ body {
   color: var(--fg);
   background-color: var(--bg);
   background-image:
-    radial-gradient(120% 80% at 8% -10%, oklch(0.9207 0.0957 88.5 / 0.9) 0%, transparent 55%),
-    radial-gradient(90% 70% at 100% 0%, oklch(0.7709 0.1467 67 / 0.22) 0%, transparent 60%),
-    radial-gradient(80% 60% at 50% 110%, oklch(0.8625 0.1494 84.7 / 0.35) 0%, transparent 65%);
+    radial-gradient(120% 80% at 8% -10%, rgba(254, 244, 207, 0.9) 0%, transparent 55%),
+    radial-gradient(90% 70% at 100% 0%, rgba(242, 169, 59, 0.22) 0%, transparent 60%),
+    radial-gradient(80% 60% at 50% 110%, rgba(252, 225, 130, 0.35) 0%, transparent 65%);
   background-attachment: fixed;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -240,7 +232,7 @@ ul {
   inset: 0;
   pointer-events: none;
   opacity: 0.4;
-  background-image: radial-gradient(oklch(0.308 0.0653 46.7 / 0.25) 1.5px, transparent 1.5px);
+  background-image: radial-gradient(rgba(74, 44, 17, 0.25) 1.5px, transparent 1.5px);
   background-size: 26px 26px;
   mask-image: radial-gradient(120% 90% at 50% 30%, #000 20%, transparent 78%);
 }
@@ -251,13 +243,13 @@ ul {
   top: 0;
   z-index: 60;
   backdrop-filter: blur(14px);
-  background: oklch(0.9887 0.0126 86.8 / 0.82);
+  background: rgba(255, 255, 255, 0.85);
   border-bottom: 2px solid transparent;
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .site-header.is-stuck {
   border-bottom-color: var(--line);
-  box-shadow: 0 8px 24px oklch(0.308 0.0653 46.7 / 0.1);
+  box-shadow: 0 8px 24px rgba(74, 44, 17, 0.1);
 }
 
 .header-inner {
@@ -436,14 +428,14 @@ ul {
   position: relative;
   z-index: 2;
   width: min(78%, 380px);
-  filter: drop-shadow(0 18px 24px oklch(0.308 0.0653 46.7 / 0.22));
+  filter: drop-shadow(0 18px 24px rgba(74, 44, 17, 0.22));
 }
 
 .float-pack {
   position: absolute;
   z-index: 3;
   width: 24%;
-  filter: drop-shadow(0 10px 14px oklch(0.308 0.0653 46.7 / 0.24));
+  filter: drop-shadow(0 10px 14px rgba(74, 44, 17, 0.24));
 }
 .float-pack.p1 { left: 0; top: 12%; transform: rotate(-11deg); }
 .float-pack.p2 { right: 2%; top: 4%; width: 20%; transform: rotate(9deg); }
@@ -754,7 +746,7 @@ ul {
 .site-footer {
   margin-top: clamp(3rem, 7vw, 5rem);
   background: var(--cocoa);
-  color: oklch(0.9207 0.0957 88.5 / 0.9);
+  color: rgba(255, 255, 255, 0.9);
 }
 .footer-inner {
   padding-block: clamp(2.25rem, 5vw, 3.25rem);
@@ -769,7 +761,7 @@ ul {
   padding: 5px;
 }
 .footer-bottom {
-  border-top: 2px solid oklch(0.9887 0.0126 86.8 / 0.16);
+  border-top: 2px solid rgba(255, 255, 255, 0.16);
   padding-block: 1.25rem;
   display: flex;
   justify-content: space-between;
@@ -789,7 +781,7 @@ ul {
   background: var(--caramel);
   color: var(--paper);
   border: 2px solid var(--cocoa);
-  box-shadow: 0 10px 24px oklch(0.308 0.0653 46.7 / 0.32);
+  box-shadow: 0 10px 24px rgba(74, 44, 17, 0.32);
 }
 
 .reveal { opacity: 1; transform: none; }
