@@ -42,7 +42,6 @@
   }
 
   var header = document.getElementById("siteHeader");
-  var fab = document.getElementById("fab");
 
   function onScroll() {
     var y = window.scrollY || document.documentElement.scrollTop;
