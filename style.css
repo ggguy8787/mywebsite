@@ -427,7 +427,10 @@ ul {
 .hero-mascot {
   position: relative;
   z-index: 2;
-  width: min(78%, 380px);
+  width: 100% !important;
+  max-width: 280px !important; /* 调整吉祥物的大小 */
+  height: auto !important;
+  object-fit: contain !important;
   filter: drop-shadow(0 18px 24px rgba(74, 44, 17, 0.22));
 }
 
