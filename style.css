@@ -803,3 +803,23 @@ ul {
   .combo-grid { grid-template-columns: 1.15fr 0.85fr; }
   .contact-card { grid-template-columns: 1.05fr 0.95fr; align-items: center; }
 }
+/* 修复 SVG 图标巨大化变形问题 */
+.order-btn svg,
+.btn svg,
+.in-combo svg {
+  width: 1rem !important;
+  height: 1rem !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+}
+
+.order-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.4rem !important;
+  padding: 0.5rem 0.9rem !important;
+  white-space: nowrap !important;
+}
