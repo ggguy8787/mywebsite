@@ -852,51 +852,80 @@ ul {
   white-space: nowrap !important;
 }
 /* =============================================================
-   手机端响应式适配修复（Mobile Responsiveness Fixes）
+   手机端全方位极致优化 (Mobile Optimization)
    ============================================================= */
 @media (max-width: 768px) {
-  /* 1. 调整顶栏导航，在手机上隐藏大菜单，开启汉堡包按钮 */
-  .nav, .header-actions {
-    display: none !important;
-  }
-  .nav-toggle {
-    display: inline-flex !important;
+  /* 1. 全局容器左右内边距收窄，腾出更多空间 */
+  .shell {
+    padding-inline: 0.85rem !important;
   }
 
-  /* 2. 让首屏（Hero）在手机上上下排列，文字居中，防止挤压 */
+  /* 2. 优化 Hero 首屏文字与吉祥物在手机上的间距 */
   .hero-grid {
     grid-template-columns: 1fr !important;
     text-align: center;
-    gap: 1.5rem !important;
+    gap: 1.2rem !important;
   }
   .hero-cta {
     justify-content: center;
   }
-  .hero-visual {
-    min-height: 260px !important;
-    margin-top: 1rem;
-  }
   .hero-mascot {
-    max-width: 240px !important;
+    max-width: 220px !important;
     margin: 0 auto;
   }
 
-  /* 3. 优惠卡片（Combo）在手机端单列显示 */
+  /* 3. 修复 Combo 优惠卡片在手机上的排版，让拼图更整齐 */
+  .combo-card {
+    padding: 1.25rem 1rem !important;
+    border-radius: 1.5rem !important;
+  }
   .combo-grid {
     grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
+    gap: 1.25rem !important;
   }
   .combo-collage {
     grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+  .combo-collage figure {
+    padding: 0.5rem 0.25rem !important;
+  }
+  .combo-collage img {
+    height: 65px !important;
   }
 
-  /* 4. 零食菜单网格在手机上自适应 */
+  /* 4. 优化菜单网格：在手机上完美呈现两列卡片，不再窄巴巴 */
   .menu-grid {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+  .product-card {
+    padding: 0.85rem !important;
+    border-radius: 1rem !important;
+  }
+  .product-media {
+    height: 110px !important;
+  }
+  .product-media img {
+    max-height: 95px !important;
+  }
+  .product-name {
+    font-size: 0.95rem !important;
+  }
+  .product-tagline {
+    font-size: 0.72rem !important;
+  }
+  .price .amount {
+    font-size: 1.3rem !important;
+  }
+  .order-btn {
+    padding: 0.45rem 0.7rem !important;
+    font-size: 0.75rem !important;
   }
 
-  /* 5. 调整整体内边距，防止手机屏幕边缘留空太窄 */
-  .shell {
-    padding-inline: 1rem !important;
+  /* 5. 确保联系我们卡片在手机上内边距舒适 */
+  .contact-card {
+    padding: 1.25rem 1rem !important;
+    border-radius: 1.5rem !important;
   }
 }
