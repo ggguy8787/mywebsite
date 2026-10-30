@@ -132,7 +132,6 @@ ul {
   max-width: var(--shell);
   margin-inline: auto;
   padding-inline: var(--gutter);
-  box-sizing: border-box;
 }
 
 .section {
@@ -179,11 +178,6 @@ ul {
   font-weight: 700;
   font-size: var(--fs-label);
   transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background-color var(--dur) var(--ease);
-}
-.btn svg {
-  width: 1.15em;
-  height: 1.15em;
-  flex: none;
 }
 
 .btn-primary {
@@ -352,17 +346,29 @@ ul {
   color: var(--cocoa-soft);
 }
 
-/* Hero */
+/* Hero 电脑端原始高颜值布局 */
 .hero {
   position: relative;
   padding-top: clamp(2rem, 5vw, 3.5rem);
-  padding-bottom: 0;
+  padding-bottom: 2rem;
   overflow: hidden;
 }
 .hero-grid {
   display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
   gap: clamp(2rem, 5vw, 3.5rem);
   align-items: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.1rem 0.45rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--butter);
+  border: 2px solid var(--cocoa);
+  box-shadow: 3px 4px 0 var(--cocoa);
+  transform: rotate(-2deg);
 }
 .hero h1 {
   font-size: var(--fs-display);
@@ -385,20 +391,59 @@ ul {
   flex-wrap: wrap;
   gap: 0.75rem;
 }
+.hero-hand {
+  margin-top: 1.4rem;
+  font-family: var(--font-hand);
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+  color: var(--caramel-deep);
+}
+
 .hero-visual {
   position: relative;
   display: grid;
   place-items: center;
   min-height: 320px;
 }
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(6px);
+  z-index: 0;
+}
+.hero-blob.a {
+  width: 62%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle at 40% 35%, var(--butter-pale), var(--butter));
+}
 .hero-mascot {
   position: relative;
   z-index: 2;
-  width: 100% !important;
-  max-width: 280px !important;
-  height: auto !important;
-  object-fit: contain !important;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  object-fit: contain;
   filter: drop-shadow(0 18px 24px rgba(74, 44, 17, 0.22));
+}
+
+.float-pack {
+  position: absolute;
+  z-index: 3;
+  width: 24%;
+  filter: drop-shadow(0 10px 14px rgba(74, 44, 17, 0.24));
+}
+.float-pack.p1 { left: 0; top: 12%; transform: rotate(-11deg); }
+.float-pack.p2 { right: 2%; top: 4%; width: 20%; transform: rotate(9deg); }
+.float-pack.p3 { left: 4%; bottom: 6%; width: 22%; transform: rotate(7deg); }
+.float-pack.p4 { right: 6%; bottom: 12%; width: 19%; transform: rotate(-8deg); }
+
+.hero-arrow {
+  position: absolute;
+  right: 2%;
+  bottom: 22%;
+  width: 84px;
+  color: var(--caramel-deep);
+  z-index: 1;
+  opacity: 0.85;
 }
 
 /* Combo banner */
@@ -436,7 +481,7 @@ ul {
   object-fit: contain;
 }
 
-/* Menu (默认电脑端为多列网格) */
+/* Menu */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -483,7 +528,7 @@ ul {
 }
 .price .amount { font-size: 1.6rem; }
 
-/* Steps (默认电脑端横向三列) */
+/* Steps */
 .steps-panel {
   padding: clamp(1.75rem, 4vw, 3rem);
   border-radius: var(--radius-xl);
@@ -557,7 +602,7 @@ ul {
   gap: 2rem;
 }
 
-/* 按钮与图标基础样式 */
+/* 全局锁定 SVG 图标大小，防止巨大黑块 */
 svg {
   max-width: 100%;
 }
@@ -567,37 +612,38 @@ svg {
 .in-combo svg,
 .product-card svg,
 .fab svg {
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-  display: inline-block;
+  width: 18px !important;
+  height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
 }
 
 .order-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 0.5rem 0.9rem;
-  border-radius: 999px;
-  white-space: nowrap;
-  background: var(--cocoa);
-  color: var(--butter);
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: 999px !important;
+  white-space: nowrap !important;
+  background: var(--cocoa) !important;
+  color: var(--butter) !important;
 }
 
-/* 桌面端特有显示规则 */
+/* 电脑端大屏幕特有样式（>900px） */
 @media (min-width: 900px) {
   .nav, .header-actions { display: flex !important; }
   .nav-toggle, .mobile-nav { display: none !important; }
-  .hero-grid { grid-template-columns: 1.05fr 0.95fr !important; }
   .combo-grid { grid-template-columns: 1.15fr 0.85fr !important; }
   .contact-card { grid-template-columns: 1.05fr 0.95fr !important; align-items: center !important; }
 }
 
 /* =============================================================
-   手机端专属适配（严格限制在 max-width: 768px 以内，绝不影响网页版）
+   手机端专属适配（只在 <= 800px 生效，绝不破坏电脑端）
    ============================================================= */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   html, body {
     width: 100% !important;
     max-width: 100vw !important;
@@ -611,73 +657,9 @@ svg {
     box-sizing: border-box !important;
   }
 
-  /* 手机端菜单恢复完美双列或单列，不影响电脑端网格 */
-  .menu-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.75rem !important;
-  }
-
-  .product-card {
-    width: 100% !important;
-    padding: 0.85rem !important;
-  }
-
-  /* 手机端步骤卡片改为垂直竖排并隐藏横向箭头 */
-  .steps {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 1rem !important;
-  }
-  .step-arrow {
+  /* 隐藏容易撑破手机屏幕的周围漂浮零食和矢量箭头 */
+  .float-pack, .hero-arrow {
     display: none !important;
-  }
-
-  .order-btn {
-    width: 100% !important;
-    justify-content: center !important;
-    margin-top: 0.5rem !important;
-  }
-}
-/* =============================================================
-   完美平衡：电脑端大屏（>768px）与 手机端小屏（<=768px）
-   ============================================================= */
-
-/* 1. 电脑端标准多列布局 */
-@media (min-width: 769px) {
-  .hero-grid {
-    grid-template-columns: 1.1fr 0.9fr !important;
-    text-align: left !important;
-  }
-  .hero-cta {
-    justify-content: flex-start !important;
-  }
-  .menu-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
-  }
-  .steps {
-    display: grid !important;
-    grid-template-columns: 1fr auto 1fr auto 1fr !important;
-    align-items: center !important;
-  }
-  .step-arrow {
-    display: block !important;
-  }
-}
-
-/* 2. 手机端专属竖排布局（严格限制在 768px 以内） */
-@media (max-width: 768px) {
-  html, body {
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
-  }
-
-  .shell {
-    width: 100% !important;
-    max-width: 100vw !important;
-    padding-inline: 1rem !important;
-    box-sizing: border-box !important;
   }
 
   .hero-grid {
@@ -685,6 +667,7 @@ svg {
     text-align: center !important;
     gap: 1.5rem !important;
   }
+
   .hero-cta {
     justify-content: center !important;
   }
@@ -705,6 +688,7 @@ svg {
     flex-direction: column !important;
     gap: 1rem !important;
   }
+
   .step-arrow {
     display: none !important;
   }
