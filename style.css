@@ -826,3 +826,52 @@ ul {
   padding: 0.5rem 0.9rem !important;
   white-space: nowrap !important;
 }
+/* =============================================================
+   手机端响应式适配修复（Mobile Responsiveness Fixes）
+   ============================================================= */
+@media (max-width: 768px) {
+  /* 1. 调整顶栏导航，在手机上隐藏大菜单，开启汉堡包按钮 */
+  .nav, .header-actions {
+    display: none !important;
+  }
+  .nav-toggle {
+    display: inline-flex !important;
+  }
+
+  /* 2. 让首屏（Hero）在手机上上下排列，文字居中，防止挤压 */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 1.5rem !important;
+  }
+  .hero-cta {
+    justify-content: center;
+  }
+  .hero-visual {
+    min-height: 260px !important;
+    margin-top: 1rem;
+  }
+  .hero-mascot {
+    max-width: 240px !important;
+    margin: 0 auto;
+  }
+
+  /* 3. 优惠卡片（Combo）在手机端单列显示 */
+  .combo-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .combo-collage {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* 4. 零食菜单网格在手机上自适应 */
+  .menu-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+  }
+
+  /* 5. 调整整体内边距，防止手机屏幕边缘留空太窄 */
+  .shell {
+    padding-inline: 1rem !important;
+  }
+}
