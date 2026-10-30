@@ -875,21 +875,67 @@ ul {
     padding-inline: 1rem !important;
   }
 }
-/* 修复手机端 How to order 步骤卡片跑出框的问题 */
-@media (max-width: 768px) {
-  .steps-panel {
-    padding: 1.25rem 1rem !important;
-  }
+/* =============================================================
+   强制修复手机端 How to order 步骤卡片错位
+   ============================================================= */
+.steps-panel {
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border-radius: var(--radius-xl);
+  background: var(--butter-pale);
+  border: 3px solid var(--cocoa);
+  box-shadow: var(--sticker-xl);
+}
+
+.steps {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.step {
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  gap: 1.1rem !important;
+  padding: 1.25rem 1.35rem !important;
+  border-radius: var(--radius-lg) !important;
+  background: var(--paper) !important;
+  border: 3px solid var(--cocoa) !important;
+  box-shadow: var(--sticker) !important;
+  width: 100% !important;
+}
+
+.step-num {
+  display: grid !important;
+  place-items: center !important;
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 18px !important;
+  background: var(--caramel) !important;
+  border: 3px solid var(--cocoa) !important;
+  font-family: var(--font-display) !important;
+  font-size: 1.35rem !important;
+  color: var(--paper) !important;
+  flex-shrink: 0 !important;
+}
+
+/* 电脑端才显示横向箭头，手机端强制隐藏，彻底解决撑破边框问题 */
+.step-arrow {
+  display: none !important;
+}
+
+@media (min-width: 768px) {
   .steps {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 1.25rem !important;
-  }
-  .step {
-    width: 100% !important;
-    grid-template-columns: auto 1fr !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr auto 1fr !important;
+    align-items: center !important;
   }
   .step-arrow {
-    display: none !important; /* 在手机端隐藏横向箭头，避免错位 */
+    display: block !important;
+    width: 54px !important;
+    color: var(--caramel-deep) !important;
+    justify-self: center !important;
   }
 }
