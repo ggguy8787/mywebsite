@@ -436,7 +436,7 @@ ul {
   object-fit: contain;
 }
 
-/* Menu */
+/* Menu (默认电脑端为多列网格) */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -483,7 +483,7 @@ ul {
 }
 .price .amount { font-size: 1.6rem; }
 
-/* Steps */
+/* Steps (默认电脑端横向三列) */
 .steps-panel {
   padding: clamp(1.75rem, 4vw, 3rem);
   border-radius: var(--radius-xl);
@@ -493,8 +493,9 @@ ul {
 }
 
 .steps {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  align-items: center;
   gap: 1.5rem;
   list-style: none;
   padding: 0;
@@ -528,7 +529,10 @@ ul {
 }
 
 .step-arrow {
-  display: none;
+  display: block;
+  width: 54px;
+  color: var(--caramel-deep);
+  justify-self: center;
 }
 
 /* Contact & Footer */
@@ -553,9 +557,7 @@ ul {
   gap: 2rem;
 }
 
-/* =============================================================
-   强力强制修复：手机端显示与 SVG 图标限制（最高优先级）
-   ============================================================= */
+/* 按钮与图标基础样式 */
 svg {
   max-width: 100%;
 }
@@ -565,45 +567,25 @@ svg {
 .in-combo svg,
 .product-card svg,
 .fab svg {
-  width: 18px !important;
-  height: 18px !important;
-  min-width: 18px !important;
-  min-height: 18px !important;
-  max-width: 18px !important;
-  max-height: 18px !important;
-  flex-shrink: 0 !important;
-  display: inline-block !important;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: inline-block;
 }
 
 .order-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 6px !important;
-  padding: 0.5rem 0.9rem !important;
-  width: auto !important;
-  height: auto !important;
-  border-radius: 999px !important;
-  white-space: nowrap !important;
-  background: var(--cocoa) !important;
-  color: var(--butter) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  background: var(--cocoa);
+  color: var(--butter);
 }
 
-/* 桌面端布局 */
-@media (min-width: 768px) {
-  .steps {
-    display: grid !important;
-    grid-template-columns: 1fr auto 1fr auto 1fr !important;
-    align-items: center !important;
-  }
-  .step-arrow {
-    display: block !important;
-    width: 54px !important;
-    color: var(--caramel-deep) !important;
-    justify-self: center !important;
-  }
-}
-
+/* 桌面端特有显示规则 */
 @media (min-width: 900px) {
   .nav, .header-actions { display: flex !important; }
   .nav-toggle, .mobile-nav { display: none !important; }
@@ -612,7 +594,9 @@ svg {
   .contact-card { grid-template-columns: 1.05fr 0.95fr !important; align-items: center !important; }
 }
 
-/* 手机端极致适配（彻底解决右侧空白与巨型按钮） */
+/* =============================================================
+   手机端专属适配（严格限制在 max-width: 768px 以内，绝不影响网页版）
+   ============================================================= */
 @media (max-width: 768px) {
   html, body {
     width: 100% !important;
@@ -627,16 +611,26 @@ svg {
     box-sizing: border-box !important;
   }
 
+  /* 手机端菜单恢复完美双列或单列，不影响电脑端网格 */
   .menu-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 1rem !important;
-    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
   }
 
   .product-card {
     width: 100% !important;
-    max-width: 100% !important;
+    padding: 0.85rem !important;
+  }
+
+  /* 手机端步骤卡片改为垂直竖排并隐藏横向箭头 */
+  .steps {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  .step-arrow {
+    display: none !important;
   }
 
   .order-btn {
