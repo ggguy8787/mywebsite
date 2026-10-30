@@ -908,3 +908,46 @@ svg {
     box-sizing: border-box !important;
   }
 }
+/* =============================================================
+   终极暴力修复：锁定手机端宽度 & 强制缩小所有图标
+   ============================================================= */
+
+/* 1. 锁死页面宽度，绝对禁止任何横向溢出 */
+html, body {
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+}
+
+/* 2. 强制所有按钮、链接里的 SVG 图标变成正常大小，绝不放大成黑块 */
+button svg, a svg, .btn svg, .order-btn svg, .fab svg, .in-combo svg, span svg {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+/* 3. 手机端针对性优化：隐藏首屏容易撑破屏幕的浮动挂件，确保排版清爽整洁 */
+@media (max-width: 768px) {
+  .float-pack, .hero-arrow, .hero-blob {
+    display: none !important; /* 手机端隐藏漂浮零食和箭头，防止撑坏版面 */
+  }
+  
+  .hero {
+    overflow: hidden !important;
+    padding-top: 1.5rem !important;
+  }
+
+  .shell {
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding-inline: 1rem !important;
+    box-sizing: border-box !important;
+  }
+}
