@@ -875,3 +875,21 @@ ul {
     padding-inline: 1rem !important;
   }
 }
+/* 修复手机端 How to order 步骤卡片跑出框的问题 */
+@media (max-width: 768px) {
+  .steps-panel {
+    padding: 1.25rem 1rem !important;
+  }
+  .steps {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+  }
+  .step {
+    width: 100% !important;
+    grid-template-columns: auto 1fr !important;
+  }
+  .step-arrow {
+    display: none !important; /* 在手机端隐藏横向箭头，避免错位 */
+  }
+}
